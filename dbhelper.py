@@ -3,7 +3,7 @@
 # https://docs.python.org/3.5/library/shelve.html
 
 import shelve
-from datetime import timedelta, datetime
+from datetime import timedelta
 
 import conf
 
@@ -29,13 +29,14 @@ def set_today_prediction(date, prediction):
     db.close()
 
 def get_today_prediction(date):
+    db = shelve.open(conf.storage_name)
+    date = date.strftime('%d/%m/%Y')
     try:
-        db = shelve.open(conf.storage_name)
-        date = date.strftime('%d/%m/%Y')
         prediction = db[date]
         db.close()
         return prediction
     except KeyError:
+        db.close()
         return None
 
 def get_user_sign(user_id):

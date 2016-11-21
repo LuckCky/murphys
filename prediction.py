@@ -23,8 +23,12 @@ def predictor():
 def read_prediction(sign):
     delete_old_prediction(datetime.now())
     prediction = get_today_prediction(datetime.now())
-    with open('Murpys_laws.txt', 'r') as source:
-        for num, line in enumerate(source):
-            if num == prediction[sign]:
-                n = line.find('.')
-                return line[:n], line[n+2:].rstrip()
+    if prediction:
+        with open('Murpys_laws.txt', 'r') as source:
+            for num, line in enumerate(source):
+                if num == prediction[sign]:
+                    n = line.find('.')
+                    return line[:n], line[n+2:].rstrip()
+    else:
+        predictor()
+        read_prediction(sign)

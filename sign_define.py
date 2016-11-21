@@ -1,7 +1,7 @@
 from signs import signs
 from dbhelper import set_user_sign
 
-def parse_date(user_id, birth_date):
+def parse_date(birth_date):
     if '/' in birth_date:
         birth_date = birth_date.split('/')
     elif '.' in birth_date:
@@ -25,20 +25,20 @@ def check_date(birth_date_day, birth_date_month):
             return False
     return True
 
-def sign_define(user_id, birth_date):
-    if birth_date == ['29', '2']:
-        # set_user_sign(user_id, 'Рыбы')
+def sign_define(user_id, day, month):
+    if day == 29 and month == 2:
+        set_user_sign(user_id, 'Рыбы')
         return 'Рыбы'
     for num, k in enumerate(signs):
         end_month = k[1][1][1]
         end_day = k[1][1][0]
-        if birth_date_month == end_month:
-            if birth_date_day <= end_day:
-                # set_user_sign(user_id, signs[num][0])
+        if month == end_month:
+            if day <= end_day:
+                set_user_sign(user_id, signs[num][0])
                 return signs[num][0][0]
             else:
-                if birth_date_month == 3:
-                    # set_user_sign(user_id, 'Рыбы')
+                if month == 3:
+                    set_user_sign(user_id, 'Рыбы')
                     return 'Рыбы'
-                # set_user_sign(user_id, signs[num+1][0])
+                set_user_sign(user_id, signs[num+1][0])
                 return signs[num+1][0][0]
