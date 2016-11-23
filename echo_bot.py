@@ -14,10 +14,10 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['гороскоп', 'horoscope', 'horrorscope'])
 def send_horoscope(message):
-    sign = get_user_sign(message.chat_id)
+    sign = get_user_sign(message.from_user.id)
     if sign:
         prediction = read_prediction(sign)
-        reply = sign + '. Cегодня ваш день будет определять {0}'.format(prediction[0]) \
+        reply = sign[0] + '. Cегодня ваш день будет определять {0}'.format(prediction[0]) \
                 + 'который гласит: {0}'.format(prediction[1])
     else:
         reply = 'Пожалуйста, напишите дату своего рождения в формате ДД/ММ или ДД.ММ'
@@ -25,7 +25,7 @@ def send_horoscope(message):
 
 @bot.message_handler(regexp='ороскоп | oroscope')
 def send_horoscope(message):
-    sign = get_user_sign(message.chat_id)
+    sign = get_user_sign(message.from_user.id)
     if sign:
         prediction = read_prediction(sign)
         reply = sign + '. Cегодня ваш день будет определять {0}'.format(prediction[0]) \
@@ -38,7 +38,7 @@ def send_horoscope(message):
 def send_day(message):
     day, month = parse_date(message.text)
     if check_date(day, month):
-        sign = sign_define(message.chat_id, day, month)
+        sign = sign_define(message.from_user.id, day, month)
         try:
             prediction = read_prediction(sign)
             reply = sign + '. Cегодня ваш день будет определять {0}'.format(prediction[0]) \
