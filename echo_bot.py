@@ -20,7 +20,7 @@ def send_horoscope(message):
         reply = sign[0] + '. Cегодня ваш день будет определять {0}'.format(prediction[0]) \
                 + 'который гласит: {0}'.format(prediction[1])
     else:
-        reply = 'Пожалуйста, напишите дату своего рождения в формате ДД/ММ или ДД.ММ'
+        reply = 'Пожалуйста, напишите дату своего рождения в формате ДД/ММ'# или ДД.ММ'
     bot.reply_to(message, reply)
 
 @bot.message_handler(regexp='ороскоп | oroscope')
