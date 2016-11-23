@@ -51,7 +51,7 @@ def send_day(message):
 
 @bot.message_handler(commands=['change'])
 def change_sign(message):
-    reply = 'Пожалуйста, напишите дату своего рождения в формате ДД/ММ или ДД.ММ'
+    reply = 'Пожалуйста, напишите дату своего рождения в формате ДД/ММ'# или ДД.ММ'
     bot.reply_to(message, reply)
 
 @bot.message_handler(func=lambda m: True)
