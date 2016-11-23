@@ -7,13 +7,11 @@ from sign_define import parse_date, check_date, sign_define
 
 bot = telebot.TeleBot(token)
 
-welcome = 'Привет! Я гороскоп-бот Мерфи. Даю прогноз на день текущий по законам Мерфи. ' \
-          'Команды /гороскоп или /horoscope для выдачи гороскопа и ' \
-          '/change для смены знака зодиака'
-
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-    welcome = welcome
+    welcome = 'Привет! Я гороскоп-бот Мерфи. Даю прогноз на день текущий по законам Мерфи. ' \
+          'Команды /гороскоп или /horoscope для выдачи гороскопа и ' \
+          '/change для смены знака зодиака'
     bot.reply_to(message, welcome)
 
 @bot.message_handler(commands=['гороскоп', 'horoscope', 'horrorscope'])
