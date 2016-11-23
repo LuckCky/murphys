@@ -31,7 +31,7 @@ def send_horoscope(message):
         reply = sign + '. Cегодня ваш день будет определять {0}'.format(prediction[0]) \
                 + 'который гласит: {0}'.format(prediction[1])
     else:
-        reply = 'Пожалуйста, напишите дату своего рождения в формате ДД/ММ или ДД.ММ'
+        reply = 'Пожалуйста, напишите дату своего рождения в формате ДД/ММ'# или ДД.ММ'
     bot.reply_to(message, reply)
 
 @bot.message_handler(regexp='[0-9][0-9]/[0-9][0-9]')# | [0-9][0-9].[0-9][0-9] | [0-9][0-9],[0-9][0-9]')
@@ -42,7 +42,7 @@ def send_day(message):
         try:
             prediction = read_prediction(sign)
             reply = sign + '. Cегодня ваш день будет определять {0}'.format(prediction[0]) \
-                + 'который гласит: {0}'.format(prediction[1])
+                + ', который гласит: {0}'.format(prediction[1])
         except TypeError:
             reply = 'Я запутался, пожалуйста, повторите команду'
     else:
