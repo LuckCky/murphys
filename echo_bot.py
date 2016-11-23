@@ -7,9 +7,13 @@ from sign_define import parse_date, check_date, sign_define
 
 bot = telebot.TeleBot(token)
 
+welcome = 'Привет! Я гороскоп-бот Мерфи. Даю прогноз на день текущий по законам Мерфи. ' \
+          'Команды /гороскоп или /horoscope для выдачи гороскопа и ' \
+          '/change для смены знака зодиака'
+
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-    welcome = "Привет! Я гороскоп-бот Мерфи. Даю прогноз на день текущий по законам Мерфи"
+    welcome = welcome
     bot.reply_to(message, welcome)
 
 @bot.message_handler(commands=['гороскоп', 'horoscope', 'horrorscope'])
@@ -18,7 +22,7 @@ def send_horoscope(message):
     if sign:
         prediction = read_prediction(sign)
         reply = sign[0] + '. Cегодня ваш день будет определять {0}'.format(prediction[0]) \
-                + 'который гласит: {0}'.format(prediction[1])
+                + ', который гласит: {0}'.format(prediction[1])
     else:
         reply = 'Пожалуйста, напишите дату своего рождения в формате ДД/ММ'# или ДД.ММ'
     bot.reply_to(message, reply)
@@ -29,7 +33,7 @@ def send_horoscope(message):
     if sign:
         prediction = read_prediction(sign)
         reply = sign + '. Cегодня ваш день будет определять {0}'.format(prediction[0]) \
-                + 'который гласит: {0}'.format(prediction[1])
+                + ', который гласит: {0}'.format(prediction[1])
     else:
         reply = 'Пожалуйста, напишите дату своего рождения в формате ДД/ММ'# или ДД.ММ'
     bot.reply_to(message, reply)
