@@ -33,4 +33,4 @@ def read_prediction(sign):
                     return line[:n], line[n+2:].rstrip()
     else:
         predictor()
-        read_prediction(sign)
+        return read_prediction(sign)
