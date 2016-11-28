@@ -19,8 +19,11 @@ def send_horoscope(message):
     sign = get_user_sign(message.from_user.id)
     if sign:
         prediction = read_prediction(sign)
-        reply = sign[0] + '. Cегодня ваш день будет определять {0}'.format(prediction[0]) \
+        if prediction:
+            reply = sign[0] + '. Cегодня ваш день будет определять {0}'.format(prediction[0]) \
                 + ', который гласит: {0}'.format(prediction[1])
+        else:
+            reply = 'Пожалуйста, напишите дату своего рождения в формате ДД/ММ'# или ДД.ММ'
     else:
         reply = 'Пожалуйста, напишите дату своего рождения в формате ДД/ММ'# или ДД.ММ'
     bot.reply_to(message, reply)
