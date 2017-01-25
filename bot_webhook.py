@@ -115,7 +115,7 @@ if __name__ == "__main__":
     # RUN SERVER, RUN!
     # cherrypy.tree.mount(WebhookServer(), WEBHOOK_URL_PATH, {'/': {}})
 
-    cherrypy.engine.start()
-    cherrypy.engine.block()
+    # cherrypy.engine.start()
+    # cherrypy.engine.block()
     # bot.polling()
 
