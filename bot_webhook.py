@@ -106,7 +106,7 @@ if __name__ == "__main__":
     cherrypy.config.update({
         'engine.autoreload.on': False,
         'server.socket_host': WEBHOOK_LISTEN,
-        'server.socket_port': WEBHOOK_PORT,
+        # 'server.socket_port': WEBHOOK_PORT,
         'server.ssl_module': 'builtin',
         # 'server.ssl_certificate': WEBHOOK_SSL_CERT,
         # 'server.ssl_private_key': WEBHOOK_SSL_PRIV
