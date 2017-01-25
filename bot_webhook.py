@@ -103,14 +103,14 @@ if __name__ == "__main__":
     time.sleep(3)
     bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH)
 
-    # cherrypy.config.update({
-    #     'engine.autoreload.on': False,
-    #     'server.socket_host': WEBHOOK_LISTEN,
-        # 'server.socket_port': WEBHOOK_PORT,
-        # 'server.ssl_module': 'builtin',
+    cherrypy.config.update({
+        'engine.autoreload.on': False,
+        'server.socket_host': WEBHOOK_LISTEN,
+        'server.socket_port': WEBHOOK_PORT,
+        'server.ssl_module': 'builtin',
         # 'server.ssl_certificate': WEBHOOK_SSL_CERT,
         # 'server.ssl_private_key': WEBHOOK_SSL_PRIV
-    # })
+    })
 
     # RUN SERVER, RUN!
     # cherrypy.tree.mount(WebhookServer(), WEBHOOK_URL_PATH, {'/': {}})
