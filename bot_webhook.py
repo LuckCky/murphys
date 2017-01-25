@@ -113,7 +113,8 @@ if __name__ == "__main__":
     # })
 
     # RUN SERVER, RUN!
-    cherrypy.tree.mount(WebhookServer(), WEBHOOK_URL_PATH, {'/': {}})
+    # cherrypy.tree.mount(WebhookServer(), WEBHOOK_URL_PATH, {'/': {}})
+    cherrypy.tree.mount(application, WEBHOOK_URL_PATH, {'/': {}})
 
     cherrypy.engine.start()
     cherrypy.engine.block()
