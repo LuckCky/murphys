@@ -1,5 +1,6 @@
 import time
 import cherrypy
+import os
 
 import telebot
 
@@ -10,16 +11,15 @@ from prediction import read_prediction
 from sign_define import parse_date, check_date, sign_define
 
 
-WEBHOOK_PORT = conf.webhook_port
+token = os.environ.get('BOT_TOKEN')
+
+WEBHOOK_PORT = int(os.environ.get('PORT', '5000'))
 WEBHOOK_LISTEN = conf.webhook_listen
 
-# WEBHOOK_SSL_CERT = conf.webhook_ssl_cert
-# WEBHOOK_SSL_PRIV = conf.webhook_ssl_priv
-
 WEBHOOK_URL_BASE = conf.post_url
-WEBHOOK_URL_PATH = "/{}/".format(conf.token)
+WEBHOOK_URL_PATH = "/{}/".format(token)
 
-bot = telebot.TeleBot(conf.token)
+bot = telebot.TeleBot(token)
 
 
 @bot.message_handler(commands=['start', 'help'])
@@ -100,16 +100,13 @@ class WebhookServer(object):
 
 if __name__ == "__main__":
     bot.remove_webhook()
-    time.sleep(3)
+    time.sleep(5)
     bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH)
 
     cherrypy.config.update({
         'engine.autoreload.on': False,
         'server.socket_host': WEBHOOK_LISTEN,
         'server.socket_port': WEBHOOK_PORT,
-        'server.ssl_module': 'builtin',
-        # 'server.ssl_certificate': WEBHOOK_SSL_CERT,
-        # 'server.ssl_private_key': WEBHOOK_SSL_PRIV
     })
 
     # RUN SERVER, RUN!
@@ -118,4 +115,3 @@ if __name__ == "__main__":
     cherrypy.engine.start()
     cherrypy.engine.block()
     # bot.polling()
-
