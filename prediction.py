@@ -1,5 +1,5 @@
 from datetime import datetime
-import
+import random
 
 from signs import signs
 from dbhelper import delete_old_prediction, set_today_prediction
