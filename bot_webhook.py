@@ -22,7 +22,7 @@ WEBHOOK_URL_PATH = "/{}/".format(token)
 bot = telebot.TeleBot(token)
 
 
-@bot.message_handler(commands=["start"])
+@bot.message_handler(commands=["start", "help"])
 def send_welcome(message):
     welcome = 'Привет! Я гороскоп-бот Мерфи. Даю прогноз на день текущий по законам Мерфи. ' \
           'Команды /гороскоп или /horoscope для выдачи гороскопа и ' \
