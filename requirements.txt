@@ -1,5 +1,4 @@
 cherrypy
 datetime
-shelve
 telebot
 time
