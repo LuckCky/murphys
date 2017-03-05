@@ -9,4 +9,4 @@ my_id = ''
 # cherrypy server params
 webhook_listen = '0.0.0.0'
 
-post_url = 'https://safe-savannah-14774.herokuapp.com'
+post_url = 'https://serene-tundra-30217.herokuapp.com/'
