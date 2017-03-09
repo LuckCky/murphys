@@ -57,7 +57,7 @@ def send_day(message):
         sign = sign_define(message.from_user.id, day, month)
         try:
             prediction = read_prediction(sign)
-            reply = sign[0] + conf.prediction.format(prediction[0], prediction[1])
+            reply = sign + conf.prediction.format(prediction[0], prediction[1])
         except TypeError:
             reply = conf.confused
     else:
