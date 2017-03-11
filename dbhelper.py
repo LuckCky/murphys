@@ -1,49 +1,55 @@
 # -*- coding: utf-8 -*-
-# A simple wrapper on Python 3 Shelve module
-# https://docs.python.org/3.5/library/shelve.html
 
 import shelve
 from datetime import timedelta
+import urllib
+import os
+import psycopg2
 
 import conf
 
-def delete_old_prediction(date):
-    db = shelve.open(conf.storage_name)
-    for delta in range(1, 8):
-        try:
-            date = date - timedelta(delta)
-            del db[date]
-        except:
-            pass
-    db.close()
+urllib.parse.uses_netloc.append("postgres")
+url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
+
+connection = psycopg2.connect(
+    database=url.path[1:],
+    user=url.username,
+    password=url.password,
+    host=url.hostname,
+    port=url.port)
+cursor = connection.cursor()
+
+try:
+    cursor.execute("CREATE TABLE predictions ( date DATE, prediction VARCHAR(2000) ) ")
+    cursor.execute("CREATE TABLE user_signs ( userID VARCHAR(50), userSign VARCHAR(20) ) ")
+    connection.commit()
+except:
+    pass
+
 
 def set_user_sign(user_id, sign):
-    db = shelve.open(conf.storage_name)
-    db[str(user_id)] = sign
-    db.close()
+    cursor.execute("INSERT INTO user_signs ( userID, userSign ) VALUES ( %s, %s ) ON CONFLICT (userID) DO UPDATE SET userSign = %s", (user_id, sign, ))
+    connection.commit()
+
 
 def set_today_prediction(date, prediction):
-    db = shelve.open(conf.storage_name)
     date = date.strftime('%d/%m/%Y')
-    db[date] = prediction
-    db.close()
+    cursor.execute("INSERT INTO predictions (date, prediction) VALUES ( %s, %s ) ", (date, prediction, ))
+    connection.commit()
+
 
 def get_today_prediction(date):
-    db = shelve.open(conf.storage_name)
     date = date.strftime('%d/%m/%Y')
-    try:
-        prediction = db[date]
-        db.close()
+    cursor.execute("SELECT prediction FROM predictions WHERE date = %s", (date, ))
+    prediction = cursor.fetchone()
+    if prediction:
         return prediction
-    except KeyError:
-        db.close()
-        return None
+    return None
+
 
 def get_user_sign(user_id):
-    try:
-        db = shelve.open(conf.storage_name)
-        sign = db[str(user_id)]
-        db.close()
+    cursor.execute("SELECT userSign FROM user_signs WHERE userID = %s", (user_id, ))
+    sign = cursor.fetchone()
+    if sign:
         return sign
-    except KeyError:
-        return None
+    return None
