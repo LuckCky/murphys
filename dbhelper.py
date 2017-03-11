@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import shelve
-from datetime import timedelta
 import urllib
 import os
 import psycopg2
-
-import conf
 
 urllib.parse.uses_netloc.append("postgres")
 url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
@@ -48,6 +44,7 @@ def get_today_prediction(date):
 
 
 def get_user_sign(user_id):
+    print(user_id)
     cursor.execute("SELECT userSign FROM user_signs WHERE userID = %s", (user_id, ))
     sign = cursor.fetchone()
     print(sign)
