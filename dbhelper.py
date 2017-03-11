@@ -50,6 +50,7 @@ def get_today_prediction(date):
 def get_user_sign(user_id):
     cursor.execute("SELECT userSign FROM user_signs WHERE userID = %s", (user_id, ))
     sign = cursor.fetchone()
+    print(sign)
     if sign:
         return sign
     return None
