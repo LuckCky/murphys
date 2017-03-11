@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import urllib
+import urllib.parse
 import os
 import psycopg2
 
@@ -44,7 +44,6 @@ def get_today_prediction(date):
 
 
 def get_user_sign(user_id):
-    print(user_id)
     cursor.execute("SELECT userSign FROM user_signs WHERE userID = %s", (user_id, ))
     sign = cursor.fetchone()
     print(sign)
