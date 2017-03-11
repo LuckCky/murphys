@@ -14,6 +14,7 @@ connection = psycopg2.connect(
     host=url.hostname,
     port=url.port)
 cursor = connection.cursor()
+global cursor
 
 try:
     cursor.execute("CREATE TABLE predictions ( date DATE, prediction VARCHAR(2000) ) ")
