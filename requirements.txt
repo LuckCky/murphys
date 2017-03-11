@@ -1,3 +1,4 @@
 cherrypy
 datetime
+psycopg2
 pytelegrambotapi
