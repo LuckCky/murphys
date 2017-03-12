@@ -14,7 +14,6 @@ connection = psycopg2.connect(
     host=url.hostname,
     port=url.port)
 cursor = connection.cursor()
-global cursor
 
 try:
     cursor.execute("CREATE TABLE predictions ( date DATE, prediction VARCHAR(2000) ) ")
@@ -44,7 +43,7 @@ def get_today_prediction(date):
     return None
 
 
-def get_user_sign(user_id):
+def get_user_sign(user_id, cursor=cursor):
     cursor.execute("SELECT userSign FROM user_signs WHERE userID = %s", (user_id, ))
     sign = cursor.fetchone()
     print(sign)
