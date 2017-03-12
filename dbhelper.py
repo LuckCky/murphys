@@ -23,7 +23,7 @@ except:
     pass
 
 
-def set_user_sign(user_id, sign):
+def set_user_sign(user_id, sign, cursor=cursor):
     cursor.execute("INSERT INTO user_signs ( userID, userSign ) VALUES ( %s, %s ) ON CONFLICT (userID) DO UPDATE SET userSign = %s", (user_id, sign, ))
     connection.commit()
 
