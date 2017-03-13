@@ -32,6 +32,7 @@ def conn():
         password=url.password,
         host=url.hostname,
         port=url.port)
+    print('CONNECTION')
     return connection.cursor(), connection
 
 
