@@ -26,8 +26,8 @@ except:
 def set_user_sign(user_id, sign):
     try:
         cursor.execute("INSERT INTO user_signs ( userID, userSign ) "
-                       "VALUES ( %s, %s ) ON CONFLICT (userID) "
-                       "DO UPDATE SET userSign = %s", (user_id, sign[0], ))
+                       "VALUES ( %(id)s, %(sign)s ) ON CONFLICT (userID) "
+                       "DO UPDATE SET userSign = %(sign)s", {'id': user_id, 'sign': sign[0]})
     # try:
     #     cursor.execute("INSERT INTO user_signs ( userID, userSign ) "
     #                    "VALUES ( %s, %s ) ", (user_id, sign[0], ))
