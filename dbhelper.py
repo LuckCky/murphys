@@ -24,12 +24,13 @@ except:
 
 
 def set_user_sign(user_id, sign):
-    # cursor.execute("INSERT INTO user_signs ( userID, userSign ) "
-    #                "VALUES ( %s, %s ) ON CONFLICT (userID) "
-    #                "DO UPDATE SET userSign = %s", (user_id, sign, ))
     try:
         cursor.execute("INSERT INTO user_signs ( userID, userSign ) "
-                       "VALUES ( %s, %s ) ", (user_id, sign[0], ))
+                       "VALUES ( %s, %s ) ON CONFLICT (userID) "
+                       "DO UPDATE SET userSign = %s", (user_id, sign[0], ))
+    # try:
+    #     cursor.execute("INSERT INTO user_signs ( userID, userSign ) "
+    #                    "VALUES ( %s, %s ) ", (user_id, sign[0], ))
     except Exception as e:
         print('set user sign EXCEPTION', e)
     finally:
@@ -38,7 +39,10 @@ def set_user_sign(user_id, sign):
 
 def set_today_prediction(date, prediction):
     date = date.strftime('%d/%m/%Y')
-    cursor.execute("INSERT INTO predictions (date, prediction) VALUES ( %s, %s ) ", (date, prediction, ))
+    try:
+        cursor.execute("INSERT INTO predictions (date, prediction) VALUES ( %s, %s ) ", (date, prediction, ))
+    except Exception as e:
+        print('set today prediction EXCEPTION', e)
     connection.commit()
 
 
@@ -54,8 +58,12 @@ def get_today_prediction(date):
 
 
 def get_user_sign(user_id):
-    cursor.execute("SELECT userSign FROM user_signs WHERE userID = %s", (user_id, ))
+    try:
+        cursor.execute("SELECT userSign FROM user_signs WHERE userID = %s", (user_id, ))
+    except Exception as e:
+        print('get user sign EXCEPTION', e)
     sign = cursor.fetchone()
+    print('get user sign SIGN', sign)
     if sign:
         return sign
     return None
