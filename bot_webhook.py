@@ -53,7 +53,6 @@ def send_horoscope(message):
 @bot.message_handler(regexp='[0-9][0-9]/[0-9][0-9]')
 def send_day(message):
     day, month = parse_date(message.text)
-    print(day, month)
     if check_date(day, month):
         sign = sign_define(message.from_user.id, day, month)
         try:
