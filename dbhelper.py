@@ -31,7 +31,7 @@ def set_user_sign(user_id, sign):
         cursor.execute("INSERT INTO user_signs ( userID, userSign ) "
                        "VALUES ( %s, %s ) ", (user_id, sign[0], ))
     except Exception as e:
-        print(e)
+        print('set user sign EXCEPTION', e)
     finally:
         connection.commit()
 
