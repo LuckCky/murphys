@@ -21,23 +21,9 @@ try:
     connection.commit()
 except:
     pass
-# finally:
-#     connection.close()
-
-
-# def conn():
-#     connection = psycopg2.connect(
-#         database=url.path[1:],
-#         user=url.username,
-#         password=url.password,
-#         host=url.hostname,
-#         port=url.port)
-#     print('CONNECTION')
-#     return connection.cursor(), connection
 
 
 def set_user_sign(user_id, sign):
-    # cursor, connection = conn()
     cursor.execute("INSERT INTO user_signs ( userID, userSign ) VALUES ( %s, %s ) ON CONFLICT (userID) DO UPDATE SET userSign = %s", (user_id, sign, ))
     connection.commit()
 
@@ -50,19 +36,18 @@ def set_today_prediction(date, prediction):
 
 def get_today_prediction(date):
     date = date.strftime('%d/%m/%Y')
+    print('DATE FROM GET PREDICTION', date)
     cursor.execute("SELECT prediction FROM predictions WHERE date = %s", (date, ))
     prediction = cursor.fetchone()
+    print('PREDICTION', prediction)
     if prediction:
         return prediction
     return None
 
 
 def get_user_sign(user_id):
-    # cursor, connection = conn()
-    print('GOT CURSOR')
     cursor.execute("SELECT userSign FROM user_signs WHERE userID = %s", (user_id, ))
     sign = cursor.fetchone()
-    print('SIGN', sign)
     if sign:
         return sign
     return None

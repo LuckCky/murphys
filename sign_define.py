@@ -1,6 +1,7 @@
 from signs import signs
 from dbhelper import set_user_sign
 
+
 def parse_date(birth_date):
     if '/' in birth_date:
         birth_date = birth_date.split('/')
@@ -9,6 +10,7 @@ def parse_date(birth_date):
     birth_date_day = int(birth_date[0])
     birth_date_month = int(birth_date[1])
     return birth_date_day, birth_date_month
+
 
 def check_date(birth_date_day, birth_date_month):
     long_months = [1, 3, 5, 7, 8, 10, 12]
@@ -24,6 +26,7 @@ def check_date(birth_date_day, birth_date_month):
         if birth_date_day > 29:
             return False
     return True
+
 
 def sign_define(user_id, day, month):
     if day == 29 and month == 2:
