@@ -27,6 +27,7 @@ def set_user_sign(user_id, sign):
     # cursor.execute("INSERT INTO user_signs ( userID, userSign ) "
     #                "VALUES ( %s, %s ) ON CONFLICT (userID) "
     #                "DO UPDATE SET userSign = %s", (user_id, sign, ))
+    print(user_id, sign)
     cursor.execute("INSERT INTO user_signs ( userID, userSign )"
                    "VALUES ( %s, %s ) ", (user_id, sign, ))
     connection.commit()
