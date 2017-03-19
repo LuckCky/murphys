@@ -74,7 +74,7 @@ def get_user_sign(user_id):
         cursor.execute("SELECT userSign FROM user_signs WHERE userID = %s", (user_id, ))
     except Exception as e:
         print('get user sign EXCEPTION', e)
-    sign = cursor.fetchone()
+    sign = cursor.fetchone()[0]
     print('get user sign SIGN', sign)
     if sign:
         return sign
