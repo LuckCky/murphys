@@ -19,7 +19,7 @@ try:
     cursor.execute("DROP TABLE predictions")
     cursor.execute("DROP TABLE user_signs")
 
-    cursor.execute("CREATE TABLE predictions ( date DATE, prediction VARCHAR(2000) ) ")
+    cursor.execute("CREATE TABLE predictions ( date DATE, sign VARCHAR(20), prediction INTEGER ) ")
     cursor.execute("CREATE TABLE user_signs ( userID INTEGER, userSign VARCHAR(20) ) ")
     connection.commit()
 except:
@@ -41,10 +41,11 @@ def set_user_sign(user_id, sign):
         connection.commit()
 
 
-def set_today_prediction(date, prediction):
+def set_today_prediction(date, sign, prediction):
     # date = date.strftime('%d/%m/%Y')
     try:
-        cursor.execute("INSERT INTO predictions (date, prediction) VALUES ( %s, %s ) ", (date, prediction, ))
+        cursor.execute("INSERT INTO predictions (date, sign, prediction) "
+                       "VALUES ( %s, %s, %s ) ", (date, sign, prediction, ))
     except Exception as e:
         print('set today prediction EXCEPTION', e)
     connection.commit()

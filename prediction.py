@@ -20,8 +20,9 @@ def predictor():
     for i in range(0, 12):
         sign = signs[i][0][0]
         prediction[sign] = lines_nums[i]
-    print('PREDICTION', prediction)
-    set_today_prediction(datetime.now(), prediction)
+    print('PREDICTION from predictor', prediction)
+    for _sign in prediction:
+        set_today_prediction(datetime.now(), _sign, prediction[_sign])
 
 
 def read_prediction(sign):
