@@ -50,7 +50,10 @@ def set_today_prediction(date, prediction):
 def get_today_prediction(date):
     date = date.strftime('%d/%m/%Y')
     print('DATE FROM GET PREDICTION', date)
-    cursor.execute("SELECT * FROM predictions WHERE date = %s", (date, ))
+    try:
+        cursor.execute("SELECT * FROM predictions WHERE date = %s", (date, ))
+    except Exception as e:
+        print('get today prediction EXCEPTION: ', e)
     prediction = cursor.fetchone()
     print('PREDICTION', prediction)
     if prediction:
