@@ -25,12 +25,13 @@ except:
 
 def set_user_sign(user_id, sign):
     try:
-        cursor.execute("INSERT INTO user_signs ( userID, userSign ) "
-                       "VALUES ( %(id)s, %(sign)s ) ON CONFLICT (userID) "
-                       "DO UPDATE SET userSign = %(sign)s", {'id': user_id, 'sign': sign[0]})
-    # try:
-    #     cursor.execute("INSERT INTO user_signs ( userID, userSign ) "
-    #                    "VALUES ( %s, %s ) ", (user_id, sign[0], ))
+        cursor.execute("SELECT userSign FROM user_signs WHERE userID = %s", (user_id, ))
+        if cursor.fetchone():
+            cursor.execute("UPDATE user_signs SET userSign = %(sign)s "
+                           "WHERE userID = %(id)s", {'id': user_id, 'sign': sign[0]})
+        else:
+            cursor.execute("INSERT INTO user_signs ( userID, userSign ) "
+                           "VALUES ( %s, %s ) ", (user_id, sign[0], ))
     except Exception as e:
         print('set user sign EXCEPTION', e)
     finally:
