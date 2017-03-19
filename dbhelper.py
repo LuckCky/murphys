@@ -50,7 +50,7 @@ def set_today_prediction(date, prediction):
 def get_today_prediction(date):
     date = date.strftime('%d/%m/%Y')
     print('DATE FROM GET PREDICTION', date)
-    cursor.execute("SELECT prediction FROM predictions WHERE date = %s", (date, ))
+    cursor.execute("SELECT * FROM predictions WHERE date = %s", (date, ))
     prediction = cursor.fetchone()
     print('PREDICTION', prediction)
     if prediction:
@@ -62,7 +62,6 @@ def get_user_sign(user_id):
     try:
         cursor.execute("SELECT userSign FROM user_signs WHERE userID = %s", (user_id, ))
     except Exception as e:
-        
         print('get user sign EXCEPTION', e)
     sign = cursor.fetchone()
     print('get user sign SIGN', sign)
