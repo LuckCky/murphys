@@ -16,6 +16,9 @@ connection = psycopg2.connect(
 cursor = connection.cursor()
 
 try:
+    cursor.execute("DROP TABLE predictions")
+    cursor.execute("DROP TABLE user_signs")
+
     cursor.execute("CREATE TABLE predictions ( date DATE, prediction VARCHAR(2000) ) ")
     cursor.execute("CREATE TABLE user_signs ( userID INTEGER, userSign VARCHAR(20) ) ")
     connection.commit()
@@ -39,7 +42,7 @@ def set_user_sign(user_id, sign):
 
 
 def set_today_prediction(date, prediction):
-    date = date.strftime('%d/%m/%Y')
+    # date = date.strftime('%d/%m/%Y')
     try:
         cursor.execute("INSERT INTO predictions (date, prediction) VALUES ( %s, %s ) ", (date, prediction, ))
     except Exception as e:
@@ -48,12 +51,11 @@ def set_today_prediction(date, prediction):
 
 
 def get_today_prediction(date):
-    date = date.strftime('%d/%m/%Y')
+    # date = date.strftime('%d/%m/%Y')
     print('DATE FROM GET PREDICTION', date)
     try:
         cursor.execute("SELECT * FROM predictions WHERE date = %s", (date, ))
     except Exception as e:
-        
         print('get today prediction EXCEPTION: ', e)
     prediction = cursor.fetchone()
     print('PREDICTION', prediction)
