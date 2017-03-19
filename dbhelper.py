@@ -59,7 +59,7 @@ def get_today_prediction(date, sign):
     print('DATE FROM GET PREDICTION', date)
     print('GET PREDICTION', sign)
     try:
-        cursor.execute("SELECT * FROM predictions WHERE date = %s AND userSign = %s", (date, sign, ))
+        cursor.execute("SELECT * FROM predictions WHERE date = %s AND sign = %s", (date, sign, ))
     except Exception as e:
         print('get today prediction EXCEPTION: ', e)
     prediction = cursor.fetchone()
