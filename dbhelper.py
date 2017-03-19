@@ -44,6 +44,7 @@ def set_user_sign(user_id, sign):
 def set_today_prediction(date, sign, prediction):
     date = date.strftime('%Y-%m-%d')
     print('DATE FROM SET PREDICTION', date)
+    print('SET PREDICTION', prediction)
     try:
         cursor.execute("INSERT INTO predictions (date, sign, prediction) "
                        "VALUES ( %s, %s, %s ) ", (date, sign, prediction, ))
