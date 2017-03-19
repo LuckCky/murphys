@@ -26,7 +26,7 @@ def predictor():
 
 
 def read_prediction(sign):
-    prediction = get_today_prediction(datetime.now())
+    prediction = get_today_prediction(datetime.now(), sign)
     if isinstance(sign, list):
         sign = sign[0]
     if prediction:
