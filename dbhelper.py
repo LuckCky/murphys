@@ -44,7 +44,7 @@ def set_user_sign(user_id, sign):
 def set_today_prediction(date, sign, prediction):
     date = date.strftime('%Y-%m-%d')
     print('DATE FROM SET PREDICTION', date)
-    print('SET PREDICTION', prediction)
+    print('SET PREDICTION', sign)
     try:
         cursor.execute("INSERT INTO predictions (date, sign, prediction) "
                        "VALUES ( %s, %s, %s ) ", (date, sign, prediction, ))
@@ -53,12 +53,13 @@ def set_today_prediction(date, sign, prediction):
     connection.commit()
 
 
-def get_today_prediction(date):
+def get_today_prediction(date, sign):
     # date = date.strftime('%d-%m-%Y')
     date = date.strftime('%Y-%m-%d')
     print('DATE FROM GET PREDICTION', date)
+    print('GET PREDICTION', sign)
     try:
-        cursor.execute("SELECT * FROM predictions WHERE date = %s", (date, ))
+        cursor.execute("SELECT * FROM predictions WHERE date = %s AND userSign = %s", (date, sign, ))
     except Exception as e:
         print('get today prediction EXCEPTION: ', e)
     prediction = cursor.fetchone()
