@@ -42,7 +42,7 @@ def set_user_sign(user_id, sign):
 
 
 def set_today_prediction(date, sign, prediction):
-    # date = date.strftime('%d-%m-%Y')
+    date = date.strftime('%Y-%m-%d')
     print('DATE FROM SET PREDICTION', date)
     try:
         cursor.execute("INSERT INTO predictions (date, sign, prediction) "
@@ -54,6 +54,7 @@ def set_today_prediction(date, sign, prediction):
 
 def get_today_prediction(date):
     # date = date.strftime('%d-%m-%Y')
+    date = date.strftime('%Y-%m-%d')
     print('DATE FROM GET PREDICTION', date)
     try:
         cursor.execute("SELECT * FROM predictions WHERE date = %s", (date, ))
