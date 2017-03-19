@@ -53,6 +53,7 @@ def get_today_prediction(date):
     try:
         cursor.execute("SELECT * FROM predictions WHERE date = %s", (date, ))
     except Exception as e:
+        
         print('get today prediction EXCEPTION: ', e)
     prediction = cursor.fetchone()
     print('PREDICTION', prediction)
