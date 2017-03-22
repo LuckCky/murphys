@@ -70,6 +70,8 @@ def get_today_prediction(date, sign):
 
 
 def get_user_sign(user_id):
+    print(user_id)
+    print(type(user_id))
     try:
         cursor.execute("SELECT userSign FROM user_signs WHERE userID = %s", (user_id, ))
     except Exception as e:
