@@ -62,10 +62,10 @@ def get_today_prediction(date, sign):
         cursor.execute("SELECT prediction FROM predictions WHERE date = %s AND sign = %s", (date, sign, ))
     except Exception as e:
         print('get today prediction EXCEPTION: ', e)
-    prediction = cursor.fetchone()[0]
+    prediction = cursor.fetchone()
     print('PREDICTION', prediction)
     if prediction:
-        return prediction
+        return prediction[0]
     return None
 
 

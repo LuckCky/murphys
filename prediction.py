@@ -32,7 +32,7 @@ def read_prediction(sign):
     if prediction:
         with open('Murpys_laws.txt', 'r') as source:
             for num, line in enumerate(source):
-                if num == prediction[sign]:
+                if num == prediction:
                     n = line.find('.')
                     return line[:n], line[n+2:].rstrip()
     else:
