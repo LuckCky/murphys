@@ -31,7 +31,6 @@ def send_welcome(message):
 @bot.message_handler(commands=['horoscope'])
 def send_horoscope(message):
     sign = get_user_sign(message.from_user.id)
-    print(sign)
     if sign:
         prediction = read_prediction(sign)
         reply = sign[0] + conf.prediction.format(prediction[0], prediction[1])
