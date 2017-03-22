@@ -33,7 +33,7 @@ def send_horoscope(message):
     sign = get_user_sign(message.from_user.id)
     if sign:
         prediction = read_prediction(sign)
-        reply = sign[0] + conf.prediction.format(prediction[0], prediction[1])
+        reply = sign + conf.prediction.format(prediction[0], prediction[1])
     else:
         reply = conf.ask_date
     bot.send_message(message.chat.id, reply)
