@@ -23,7 +23,7 @@ try:
     cursor.execute("CREATE TABLE user_signs ( userID INTEGER, userSign VARCHAR(20) ) ")
     connection.commit()
 except:
-    pass
+    connection.rollback()
 
 
 def set_user_sign(user_id, sign):
