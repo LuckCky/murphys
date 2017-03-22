@@ -73,6 +73,7 @@ def get_user_sign(user_id):
         pass
         # print('get user sign EXCEPTION', e)
     sign = cursor.fetchone()
+    print(sign)
     if sign:
         return sign[0]
     return None
