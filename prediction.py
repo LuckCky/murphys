@@ -26,8 +26,8 @@ def predictor():
 
 def read_prediction(sign):
     prediction = get_today_prediction(datetime.now(), sign)
-    if isinstance(sign, list):
-        sign = sign[0]
+    # if isinstance(sign, list):
+    #     sign = sign[0]
     if prediction:
         with open('Murpys_laws.txt', 'r') as source:
             for num, line in enumerate(source):
