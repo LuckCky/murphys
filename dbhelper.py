@@ -77,8 +77,8 @@ def get_user_sign(user_id):
     except Exception as e:
         print('get user sign EXCEPTION', e)
     print('PASSED CURSOR EXECUTE')
-    sign = cursor.fetchone()#[0]
+    sign = cursor.fetchone()
     print('get user sign SIGN', sign)
     if sign:
-        return sign
+        return sign[0]
     return None
