@@ -50,6 +50,10 @@ def set_today_prediction(date, sign, prediction):
     except Exception as e:
         pass
         # print('set today prediction EXCEPTION', e)
+    try:
+        cursor.execute("DELETE FROM  predictions WHERE date < now() - interval '7 days'")
+    except:
+        connection.rollback()
     connection.commit()
 
 
